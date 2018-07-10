@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { syncUser, logout, resetLogoutStatus } from '../redux/actions/auth'
+import { fetchProperties } from '../redux/actions/displayProperty'
 import {
   Collapse,
   Navbar,
@@ -54,6 +55,7 @@ class MainNav extends Component {
 
     componentWillReceiveProps() {
         this.props.resetLogoutStatus()
+        this.props.fetchProperties()
     }
 
     toggle() {
@@ -114,7 +116,8 @@ const mapDispatchToProps = (dispatch) => {
     return {
         syncUser: () => dispatch(syncUser()),
         logout: () => dispatch(logout()),
-        resetLogoutStatus: () => dispatch(resetLogoutStatus())
+        resetLogoutStatus: () => dispatch(resetLogoutStatus()),
+        fetchProperties: () => dispatch(fetchProperties())
     }
 }
 

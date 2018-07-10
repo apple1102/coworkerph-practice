@@ -1,5 +1,5 @@
 import axios from 'axios'
-import qs from 'query-string'
+import qs from 'qs'
 
 
 export function loginHasErrored(message) {
