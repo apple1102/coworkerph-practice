@@ -15,18 +15,24 @@ class Homepage extends Component {
         super(props)
 
         this.state = {}
-
-        console.log(this.props)
     }
 
     componentDidMount() {
-        this.props.fetchProperties();
+        if (this.props.properties.length === 0) {
+            this.props.fetchProperties()
+        }
+    }
+
+    componentWillReceiveProps() {
+        if (this.props.properties.length === 0) {
+            this.props.fetchProperties()
+        }
+
     }
 
     render() {
         return (
             <div>
-                <section></section>
                 <section className="mt-5">
                     <Container>
                         { this.props.propertyIsLoading ? (

@@ -55,7 +55,6 @@ class MainNav extends Component {
 
     componentWillReceiveProps() {
         this.props.resetLogoutStatus()
-        this.props.fetchProperties()
     }
 
     toggle() {
@@ -108,7 +107,8 @@ const mapStateToProps = (state) => {
         token: state.token,
         userDetails: state.userDetails,
         syncUserIsLoading: state.syncUserIsLoading,
-        logoutSuccess: state.logoutSuccess
+        logoutSuccess: state.logoutSuccess,
+        properties: state.displayPropertySuccess
     }
 }
 
