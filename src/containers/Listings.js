@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom' 
+import { Link } from 'react-router-dom'
 import { fetchProperty } from '../redux/actions/property'
 import {
   Container,
@@ -28,17 +28,19 @@ class Listings extends Component {
   }
 
   render() {
-    // console.log(this.props)
-    // return <div></div>
     return (
       <div>
         { this.props.propertyIsLoading || !this.props.property ? (
           // component is loading
-          <div style={{ 
-            backgroundColor: '#95a5a6',
-            height: '40vh' }}>
-            
-            </div>
+          <div>
+            <Jumbotron style={{ 
+              backgroundColor: '#95a5a6',
+              height: '40vh' }}>
+            </Jumbotron>
+            <Container>
+              loading..
+            </Container>
+          </div>
         ) : (
           <div>
             <Jumbotron style={{ 
@@ -46,7 +48,6 @@ class Listings extends Component {
               backgroundPosition: 'center',
               backgroundSize: 'cover',
               height: '40vh' }}>
-
             </Jumbotron>
             <Container>
               qweqwe
