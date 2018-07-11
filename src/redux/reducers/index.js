@@ -2,6 +2,7 @@ import { combineReducers } from 'redux'
 import { bookingHasErrored, bookingIsLoading, bookings } from './booking'
 import { loginHasErrored, loginIsLoading, loginSuccess, token, userDetails, syncUserIsLoading, logoutSuccess} from './auth'
 import { displayPropertyHasErrored, displayPropertyIsLoading, displayPropertySuccess } from './displayProperty'
+import { propertySuccess, propertyIsLoading, propertyHasErrored } from './property'
 
 const appReducer = combineReducers({
     bookingHasErrored,
@@ -16,7 +17,10 @@ const appReducer = combineReducers({
     logoutSuccess,
     displayPropertyHasErrored,
     displayPropertyIsLoading,
-    displayPropertySuccess
+    displayPropertySuccess,
+    propertySuccess,
+    propertyIsLoading,
+    propertyHasErrored
 })
 
 const rootReducer = (state, action) => {

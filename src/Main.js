@@ -22,12 +22,18 @@ const Bookings = Loadable({
     loading: Loading
 })
 
+const Listings = Loadable({
+  loader: () => import('./containers/Listings'),
+  loading: Loading
+})
+
 const Main = () => {
     return (
         <main>
             <Switch>
                 <Route exact path="/" component={Homepage} />
                 <Route path="/login" component={Login} />
+                <Route path="/listings/:host/:property" component={Listings} />
                 <PrivateRoute path="/bookings" component={Bookings} />
             </Switch>
         </main>
