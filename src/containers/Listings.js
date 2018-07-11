@@ -29,6 +29,7 @@ class Listings extends Component {
 
   render() {
     //TODO: https://stackoverflow.com/questions/43115246/how-to-detect-when-a-image-is-loaded-when-is-a-prop-and-change-a-state-on-react
+    //TODO: https://github.com/IRIdeveloper/react-iron-image
     return (
       <div>
         { this.props.propertyIsLoading || !this.props.property ? (
