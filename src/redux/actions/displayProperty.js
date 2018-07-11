@@ -27,6 +27,7 @@ export function fetchProperties() {
         axios
             .get('http://localhost:9000/api/property')
             .then(resp => {
+
                 let { status, property, message } = resp.data
 
                 if (status !== "success") {

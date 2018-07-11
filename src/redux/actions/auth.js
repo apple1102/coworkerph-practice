@@ -85,6 +85,12 @@ export function syncUser() {
     }
 }
 
+export function resetLoginError() {
+    return (dispatch) => {
+        dispatch(loginHasErrored(null))
+    }
+}
+
 function getUserDetails(Authorization) {
     return new Promise((resolve, reject) => {
         axios
@@ -122,6 +128,7 @@ export function login(credentials) {
                         .then((user) => {
                             dispatch(loginSuccess(true))
                             dispatch(loginIsLoading(false))
+                            dispatch(loginHasErrored(null))
                             dispatch(userDetails(user))
                         })
                 }

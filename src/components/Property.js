@@ -5,17 +5,32 @@ import {
     CardImg,
     CardText,
     CardTitle,
-    CardFooter,
-    Button
+    CardFooter
 } from 'reactstrap'
+import { Link } from 'react-router-dom'
 import ContentLoader from "react-content-loader"
+import truncatise from 'truncatise'
+import slug from 'slug'
 
-const Property = (props) => {
-    console.log(props)
+const Property = ({data}) => {
+
+    // slugs
+    let hostSlug = slug(data.host.name.toLowerCase()) 
+    let propertySlug = slug(data.name.toLowerCase())
+    let propertyUrl = `/${hostSlug}/${propertySlug}`
+
+    // pricings
+    let prices = []
+    let lowestPrice
+
+    // lowest pricing computation
+    Object.keys(data.rate).map(k => prices.push(data.rate[k].price))
+    lowestPrice = Math.min(...prices)
+    
     return (
         <Card className="m-1">
             <CardImg 
-                src={`http://localhost:9000/${props.data.coverPhoto.url}`}
+                src={`http://localhost:9000/${data.coverPhoto.url}`}
                 style={{
                     maxHeight: '165px',
                     width: '100%',
@@ -24,13 +39,21 @@ const Property = (props) => {
                 }} 
                 />
             <CardBody>
-                <CardTitle>Loft Coworking</CardTitle>
-                <CardText>
-                    eqweqeqwes
+                <CardTitle className="mb-0">
+                  <Link to={'/listings'+propertyUrl}>{ data.name }</Link>
+                </CardTitle>
+                <small className="text-muted text-uppercase">{data.host.name}</small>
+                <CardText className="mt-2">
+                    {truncatise(data.description, {
+                      TruncateLength: 20,
+                      TruncateBy: 'words',
+                      Strict: true,
+                      Suffix: '...'
+                    })}
                 </CardText>
             </CardBody>
             <CardFooter className="text-muted text-right">
-                starts at 199
+                Starts at { lowestPrice } PHP
             </CardFooter>
         </Card>
     )
