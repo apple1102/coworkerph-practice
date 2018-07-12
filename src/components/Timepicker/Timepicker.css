@@ -1,0 +1,27 @@
+.time-picker-defaults {
+  width: 100%;
+}
+
+.rc-time-picker-panel-inner,
+.time-picker-defaults,
+.rc-time-picker-panel-input,
+.time-picker-defaults input {
+  border-radius: 0;
+  
+}
+
+.time-picker-defaults input,
+.rc-time-picker-panel-input {
+  text-align: center;
+}
+
+.time-picker-defaults input {
+  padding: 1.3em 0 1.3em 0;
+}
+
+.rc-time-picker-panel-select ul li,
+.time-picker-defaults input,
+.rc-time-picker-panel-input {
+  text-transform: uppercase;
+}
+

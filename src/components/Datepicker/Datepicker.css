@@ -1,0 +1,19 @@
+.DateRangePickerInput,
+.DateRangePicker {
+  width: 100%;
+  text-align: center;
+
+}
+
+.DateInput_input {
+  text-align: center
+}
+
+.DateInput__small {
+  width: auto;
+}
+
+.DateInput_input__small {
+  text-transform: uppercase;
+  font-size: 12px;
+}

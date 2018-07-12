@@ -1,0 +1,10 @@
+.numeric-input {
+  border-radius: 0;
+  font-size: 12px !important;
+  padding-top: 7px;
+  padding-bottom: 7px;
+}
+
+.react-numeric-input b {
+  border-radius: 0 !important;
+}

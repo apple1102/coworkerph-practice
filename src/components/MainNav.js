@@ -11,7 +11,8 @@ import {
   UncontrolledDropdown,
   DropdownToggle,
   DropdownMenu,
-  DropdownItem } from 'reactstrap'
+  DropdownItem,
+  Container } from 'reactstrap'
 import { Redirect, Link } from 'react-router-dom'
 import { BeatLoader } from 'react-spinners'
 
@@ -71,7 +72,8 @@ class MainNav extends Component {
 
         return (
             <Navbar color="light" light expand="md">
-                <Link to="/" className="navbar-brand">Coworker</Link>
+              <Container>
+              <Link to="/" className="navbar-brand">Coworker</Link>
                 <NavbarToggler onClick={this.toggle} />
                 <Collapse isOpen={this.state.isOpen} navbar>
                     <Nav className="ml-auto" navbar>
@@ -97,6 +99,7 @@ class MainNav extends Component {
                     )}
                     </Nav>
                 </Collapse>
+              </Container>
             </Navbar>
         )
     }
