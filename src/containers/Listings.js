@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { fetchProperty } from '../redux/actions/property'
+import _ from 'lodash'
+import uuid from 'uuid/v1'
 import {
   Container,
   Jumbotron,
@@ -11,9 +13,9 @@ import {
   Card,
   CardBody
 } from 'reactstrap'
-import Datepicker from '../components/Datepicker/Datepicker'
-import Timepicker from '../components/Timepicker/Timepicker'
-import NumericInput from '../components/NumericInput/NumericInput'
+import AvailabilityChecker from '../components/AvailabilityChecker/AvailabilityChecker'
+import FontAwesome from '../components/FontAwesome'
+
 
 class Listings extends Component {
 
@@ -70,85 +72,94 @@ class Listings extends Component {
                       <span className="text-uppercase">{this.props.property.host.name}</span>
                     </Col>
                     <Col md={12} className="mt-4">
-                      <p>{this.props.property.description}</p>
+                      <span className="font-weight-bold">Description</span>
+                      <p className="mt-2">{this.props.property.description}</p>
                     </Col>
-                  </Row>
-                </Col>
-                {/*===== SPLIT ========*/}
-
-                {/*===== SPLIT ========*/}
-                <Col md={4}>
-                  <Row>
-                    <Col md={12}>
-                      <Card>
+                    <Col md={12}><hr/></Col>
+                    <Col md={12} className="mt-2">
+                      <span className="font-weight-bold">Operating Hours</span>
+                      <Row className="mt-2">
+                        <Col md={6}>
+                          { _.chunk(Object.keys(this.props.property.operation), 4)[0].map(k => (
+                            <span 
+                              className="d-block my-2" 
+                              key={ uuid() }>
+                              { _.upperFirst(k) }
+                              { this.props.property.operation[k].isOpened ? (
+                                <small 
+                                  className="ml-2"
+                                  style={{ color: '#2ecc71' }}>
+                                  open
+                                </small>
+                              ) : (
+                                <small 
+                                  className="ml-2"
+                                  style={{ color: '#e74c3c' }}>
+                                  closed
+                                </small>
+                              )} 
+                            </span>
+                          ))}
+                        </Col>
+                        <Col md={6}>
+                          { _.chunk(Object.keys(this.props.property.operation), 4)[1].map(k => (
+                            <span 
+                              className="d-block my-2" 
+                              key={ uuid() }>
+                              { _.upperFirst(k) }
+                              { this.props.property.operation[k].isOpened ? (
+                                <small 
+                                  className="ml-2 align-middle"
+                                  style={{ color: '#2ecc71' }}>
+                                  open
+                                </small>
+                              ) : (
+                                <small 
+                                  className="ml-2 align-middle"
+                                  style={{ color: '#e74c3c' }}>
+                                  closed
+                                </small>
+                              )} 
+                            </span>
+                          ))}
+                        </Col>
+                      </Row>
+                    </Col>
+                    <Col md={12}><hr/></Col>
+                    <Col md={12} className="mt-2">
+                      <span className="font-weight-bold">Amenities</span>
+                      <Card 
+                        className="mt-3 mb-3"
+                        style={{
+                          borderRadius: '0',
+                          minHeight: '200px',
+                          maxHeight: '200px',
+                          overflowY: 'scroll'
+                        }}>
                         <CardBody>
-                          {/*===== DATE PICKER =====*/}
                           <Row>
-                            <Col md={12}>
-                              <small className="mr-1 text-uppercase">Start / End Date</small>
-                              <Datepicker/>
+                            { this.props.property.amenities.map(a => (
+                              <Col
+                                key={a._id}
+                                md={4}
+                                className="mt-2">
+                              <FontAwesome 
+                                className="align-middle mr-2" 
+                                icon="check-circle"
+                                style={{ color: '#2ecc71'}} />
+                              <span 
+                                className="align-middle">
+                                {a.name}
+                              </span>
                             </Col>
+                            ))}
                           </Row>
-                          {/*===== DATE PICKER =====*/}
-
-                          {/*===== TIME PICKER ======*/}
-                          <Row>
-                            <Col md={6}>
-                              <Row>
-                                <Col className="mt-1" md={12}>
-                                  <small className="mr-1 text-uppercase">Start time</small>
-                                </Col>
-                                <Col className="mt-1" md={12}>
-                                  <Timepicker />
-                                </Col>
-                              </Row>
-                            </Col> 
-                            <Col md={6}>
-                              <Row>
-                                <Col className="mt-1" md={12}>
-                                  <small className="mr-1 text-uppercase">End time</small>
-                                </Col>
-                                <Col className="mt-1" md={12}>
-                                  <Timepicker />
-                                </Col>
-                              </Row>
-                            </Col> 
-                          </Row>
-                          {/*===== TIME PICKER ======*/}
-
-
-                          {/*===== NUMBER OF PEOPLE ======*/}
-                          <Row>
-                            <Col md={12} className="mt-1">
-                              <small className="mr-1 text-uppercase">No. of people</small>
-                              <NumericInput />
-                            </Col>
-                          </Row>
-                          {/*===== NUMBER OF PEOPLE =======*/}
-
-                          {/*===== CHECK AVAILABILITY =======*/}
-                          <Row>
-                            <Col md={12} className="mt-3">
-                              <a
-                                className="btn btn-success btn-block text-white"
-                                style={{
-                                  borderRadius: '0',
-                                  textTransform: 'uppercase',
-                                  fontSize: '12px'
-                                }}
-                                >
-                                Check availability
-                              </a>
-                            </Col>
-                          </Row>
-                          {/*===== CHECK AVAILABILITY =======*/}
                         </CardBody>
                       </Card>
                     </Col>
                   </Row>
-                  
                 </Col>
-                {/*===== SPLIT ========*/}
+                <AvailabilityChecker />
               </Row>
             </Container>
           </div>

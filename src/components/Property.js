@@ -22,9 +22,12 @@ const Property = ({data}) => {
     // pricings
     let prices = []
     let lowestPrice
-
     // lowest pricing computation
-    Object.keys(data.rate).map(k => prices.push(data.rate[k].price))
+    Object.keys(data.rate).map(k => {
+      if (data.rate[k].price) {
+        prices.push(data.rate[k].price)
+      }
+    })
     lowestPrice = Math.min(...prices)
     
     return (
